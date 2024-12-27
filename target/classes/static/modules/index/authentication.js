@@ -1,0 +1,1 @@
+let authentication = $(".authentication_form");

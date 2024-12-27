@@ -1,0 +1,10 @@
+<th:block th:fragment="themes">
+    <link rel="stylesheet" th:href="@{/modules/themes/themes.css}"/>
+    
+    <div class="themes">
+        <div th:replace="~{/icons :: sun}"></div>
+        <div th:replace="~{/icons :: moon}"></div>
+    </div>
+    
+    <script th:src="@{/modules/themes/themes.js}"></script>
+</th:block>

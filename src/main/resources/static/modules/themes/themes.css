@@ -1,0 +1,47 @@
+body:not(.dark) {
+	.moon_icon:hover {
+	    fill: black;
+	}
+}
+
+.dark {
+	.moon_icon {
+	    fill: white;
+	    cursor: default;
+	}
+	
+	.sun_icon {
+	    fill: grey;
+	    cursor: pointer;
+	}
+	
+	.sun_icon:hover {
+	    fill: white;
+	}
+}
+
+.themes {
+	width: 100%;
+	padding: 1% 2%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.sun_icon, .moon_icon {
+	width: 30px;
+	height: 30px;
+	padding: 0.2rem;
+	transition: 0.3s;
+}
+
+.sun_icon {
+	fill: black;
+	margin-right: 1rem;
+}
+
+.moon_icon {
+	fill: grey;
+	cursor: pointer;
+}

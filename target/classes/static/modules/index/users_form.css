@@ -1,0 +1,108 @@
+.dark {
+	.users_form {
+	    box-shadow: 0px 0px 1px white;
+	}
+	
+	.users_list_menu p {
+	    color: white;
+	}
+	
+	.user_icon {
+        fill: white;
+    }
+    
+    .add_icon:hover {
+        fill: white;
+    }
+	
+	.users_list_box {
+	    box-shadow: 0px 0px 1px inset white;
+	}
+	
+	.users_list_box::-webkit-scrollbar-thumb {
+	    border-radius: 30px;
+	    background-color: white;
+    }
+    
+}
+
+body.dark {
+	background-color: rgba(50, 50, 50);
+}
+
+body:not(.dark) {
+	.add_icon:hover {
+	    fill: black;
+	}
+}
+
+.app_name {
+	font-size: 3.5rem;
+	width: fit-content;
+	text-align: center;
+	font-family: Arial;
+	color: transparent;
+	background: linear-gradient(to right, red, yellow, lime, blue);
+	-webkit-background-clip: text;
+}
+
+.users_list {
+	width: 100%;
+	margin-top: 2rem;
+	font-family: Arial;
+	overflow-y: hidden;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+.users_list_menu {
+	transition: 0.5s;
+	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.users_list_menu div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.users_list_menu p {
+	margin-right: 0.5rem;
+}
+
+.user_icon {
+	fill: black;
+	width: 25px;
+	height: 25px;
+}
+
+.add_icon {
+	fill: grey;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.users_list_box {
+	height: 100%;
+	transition: 0.5s;
+	border-radius: 5px;
+	overflow-y: scroll;
+	box-shadow: 0px 0px 1px inset;
+}
+
+.users_list_box::-webkit-scrollbar {
+	width: 8px;
+	transition: 0.5s;
+}
+
+.users_list_box::-webkit-scrollbar-thumb {
+	border-radius: 30px;
+	background-color: silver;
+}

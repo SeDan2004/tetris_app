@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Пользователи</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" th:href="@{/index.css}"/>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div th:replace="~{/modules :: themes}"></div>
+        
+        <div th:replace="~{/index/forms :: users}"></div>
+        <div th:replace="~{/index/forms :: authentication}"></div>
+        
+        <script th:src="@{/index.js}"></script>
+    </body>
+</html>

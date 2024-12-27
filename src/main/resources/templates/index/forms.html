@@ -1,0 +1,31 @@
+<th:block th:fragment="users">
+    <link rel="stylesheet" th:href="@{/modules/index/users_form.css}"/>
+
+    <div class="users_form">
+        <div class="app_name">Тетрис</div>
+        <div class="users_list">
+            <div class="users_list_menu">
+                <div>
+                    <p>Список пользователей</p>
+                    <div th:replace="~{/icons :: user}"></div>
+                </div>
+                    
+                <div th:replace="~{/icons :: add}"></div>
+            </div>
+                
+            <div class="users_list_box">
+                    
+            </div>
+        </div>
+    </div>
+    
+    <script th:src="@{/modules/index/users_form.js}"></script>
+</th:block>
+
+<th:block th:fragment="authentication">
+    <link rel="stylesheet" th:href="@{/modules/index/authentication.css}"/>
+    
+    <div class="authentication_form"></div>
+    
+    <script th:src="@{/modules/index/authentication.js}"></script>
+</th:block>
