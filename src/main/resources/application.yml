@@ -3,3 +3,10 @@ spring:
         url: jdbc:postgresql://localhost:5432/tetris_app
         username: postgres
         password: postgres
+jwt:
+    application:
+        token: gacW2RsS/TS3FE5mKJMLmMdXnaTqe50wZamb6+/WNrU=
+    access:
+      expiration: 14_400
+    refresh:
+      expiration: 604_800

@@ -13,9 +13,7 @@
                 <div th:replace="~{/icons :: add}"></div>
             </div>
                 
-            <div class="users_list_box">
-                 
-            </div>
+            <div class="users_list_box"></div>
             
             <div class="pagination_box">
                 <div class="pagination">
@@ -32,7 +30,79 @@
 <th:block th:fragment="authentication">
     <link rel="stylesheet" th:href="@{/modules/index/authentication.css}"/>
     
-    <div class="authentication_form"></div>
+    <div class="authentication_form">
+        <div class="reg">
+            <div class="select_and_delete_photo">
+                <div class="select_photo_area">
+                    <label class="photo" for="photo">
+                        <input type="file" id="photo">
+                    </label>
+                </div>
+                
+                <p class="delete_photo">Удалить фото</p>
+            </div>
+            
+            <div class="reg_inf_fields">
+                <div class="login">
+                    <div class="field_title">
+                        <p>Имя пользователя</p>
+                        <div th:replace="~{/icons :: user}"></div>
+                    </div>
+                    
+                    <input type="text" placeholder="Введите имя"/>
+                </div>
+                
+                <div class="password">
+                    <div class="field_title">
+                        <p>Пароль</p>
+                        <div th:replace="~{/icons :: password}"></div>
+                    </div>
+                    
+                    <input type="password" placeholder="Введите пароль"/>
+                </div>
+                
+                <div class="repeat_password">
+                    <div class="field_title">
+                        <p>Повторите пароль</p>
+                        <div th:replace="~{/icons :: password}"></div>
+                    </div>
+                    
+                    <input type="password" placeholder="Повторите пароль"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth">
+            <div class="photo">
+                <div class="photo_box"></div>
+            </div>
+            
+            <div class="auth_inf_fields">
+                <div class="login">
+                    <div class="field_title">
+                        <p>Имя пользователя</p>
+                        <div th:replace="~{/icons :: user}"></div>
+                    </div>
+                    
+                    <input type="text" placeholder="Введите имя"/>
+                </div>
+                
+                <div class="password">
+                    <div class="field_title">
+                        <p>Пароль</p>
+                        <div th:replace="~{/icons :: password}"></div>
+                    </div>
+                    
+                    <input type="password" placeholder="Введите пароль"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="back_and_accept">
+            <div class="back">Назад</div>
+            <div class="accept">Подтвердить</div>
+        </div>
+    </div>
     
     <script th:src="@{/modules/index/authentication.js}"></script>
 </th:block>
