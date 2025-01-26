@@ -9,7 +9,8 @@ let authentication = $(".authentication_form"),
 	backToUsersBtn = $(".back"),
 	acceptAuthenticationBtn = $(".accept"),
 	imgSrc,
-	imgData = new FormData();
+	imgData = new FormData(),
+	selectedUserId;
 
 function addEvent() {
   selectPhotoInp.on("change", selectPhoto);
@@ -52,7 +53,7 @@ function acceptReg() {
 		})
 	  }
 	  
-	  // location.href
+	  location.href = "/game";
 	},
 	error(response) {
 	  alert(response.responseJSON.msg);
@@ -69,13 +70,16 @@ function acceptAuth() {
 	url: "/authentication/auth",
 	contentType: "application/json",
 	data: JSON.stringify({
+	  id: selectedUserId,
 	  login: login,
 	  password: password
 	}),
 	success(response) {
 	  let access = response.access;
 	  
-	  // location.href
+	  localStorage.setItem("access", access);
+	  
+	  location.href = "/game";
 	},
 	error(response) {
 	  alert(response.responseJSON.msg);
@@ -94,13 +98,27 @@ function backToUsers(e) {
   }
 	
   checkAuthenticationInfFields();
-	
+  
   authentication.animate({"opacity": 0}, {
 	duration: 500,
 	complete: function() {
 	  authentication.hide();
 	  users.css({"display": "flex"});
 	  users.animate({"opacity": 1}, 500);
+	  
+	  if (reg.css("display") === "flex") {
+		reg.css("display", "none");
+	  }
+	  
+	  if (auth.css("display") === "flex") {
+		let photoBox = auth.find(".photo_box"),
+		    photoBoxImg = photoBox.find("img");
+		
+		auth.css("display", "none");
+		
+		photoBoxImg.remove();
+		photoBox.css("visibility", "hidden");
+	  }
 	}
   })
 }
@@ -144,6 +162,13 @@ function setPhoto(e) {
     selectPhotoArea.prepend(photo);
     selectPhotoArea.addClass("selected_photo");
   }
+}
+
+function setUserImgAfterShowAuthenticationForm(userImg) {
+  let photoBox = auth.find(".photo_box");
+
+  photoBox.append(userImg);
+  photoBox.css("visibility", "visible");
 }
 
 function selectPhoto(e) {

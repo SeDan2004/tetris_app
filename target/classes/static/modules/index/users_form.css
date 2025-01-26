@@ -1,7 +1,3 @@
-body.dark {
-	background-color: rgba(50, 50, 50);
-}
-
 body:not(.dark) {
 	.add_icon:hover {
 	    fill: black;
@@ -129,7 +125,7 @@ body:not(.dark) {
 
 .user {
 	color: black;
-	height: 4.5rem;
+	height: 6.5rem;
 	padding: 0.5rem 1rem;
 	box-sizing: border-box;
 }
@@ -139,11 +135,38 @@ body:not(.dark) {
 	height: 100%;
 	cursor: pointer;
 	padding: 0 1rem;
-	border-radius: 30px;
+	border-radius: 100px;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.user_svg_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.user img, .user_svg_box {
+	width: 75px;
+	height: 75px;
+	border-radius: 100px;
+	box-shadow: 0px 0px 2px;
+}
+
+.user .user_icon {
+	width: 65%;
+	height: 65%;
+}
+
+.user img {
+	object-fit: cover;
+}
+
+.user p {
+	font-size: 1.5rem;
+	margin-left: 1rem;
 }
 
 .pagination_box {

@@ -1,0 +1,138 @@
+.dark {
+	.persons_records > div:first-of-type {
+	    border-bottom: 1px solid white;
+	}
+	
+	.persons_records > div:first-of-type > p:first-of-type {
+	    color: white;
+	}
+	
+	.record_holder {
+	    color: white;
+	}
+}
+
+.persons_records > div:first-of-type {
+	font-family: Arial;
+	padding-bottom: 10px;
+	border-bottom: 1px solid black;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.persons_records > div:first-of-type p {
+	font-size: 1.2rem;
+	user-select: none;
+}
+
+.pagination {
+ 	visibility: hidden;
+ 
+	display: flex;
+	flex-direction: row;
+}
+
+.pagination div {
+	color: white;
+	cursor: pointer;
+	user-select: none;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pagination div:not(.active) {
+    background-color: blue;
+}
+
+.pagination div:not(.back, .next) {
+	width: 30px;
+	border-radius: 30px;
+	
+	display: none;
+}
+
+.pagination div:not(:first-of-type) {
+	margin-left: 0.5rem;
+}
+
+.pagination div:hover {
+	background-color: rgba(0, 0, 200);
+}
+
+.back, .next {
+	padding: 0.3rem;
+	border-radius: 5px;
+}
+
+.disabled_pag {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.active {
+	pointer-events: none;
+	background-color: green;
+}
+
+.persons_records > div:last-of-type {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.record_holders_list {
+	width: 100%;
+	padding: 3% 2%;
+	box-sizing: border-box;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.record_holders_list > div:not(:first-of-type) {
+	margin-top: 1.5rem;
+}
+
+.record_holder {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.record_holder div:first-of-type {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.record_holder img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 30px;
+	margin-right: 0.5rem;
+	box-shadow: 0px 0px 2px;
+}
+
+.record_holder p {
+	font-size: 1.2rem;
+	font-family: Arial;
+}
+
+.back_to_menu {
+	color: white;
+	cursor: pointer;
+	margin-top: 1rem;
+	border-radius: 5px;
+	background-color: red;
+}
+
+.back_to_menu:hover {
+	background-color: rgba(200, 0, 0);
+}

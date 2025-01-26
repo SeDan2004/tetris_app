@@ -1,0 +1,79 @@
+.dark {
+  .tetris_options {
+      color: white;
+      border-bottom: 1px solid white;
+  }
+  
+  .canvas {
+      border: 1px solid white;
+  }
+  
+  .back_to_menu {
+      background-color: rgba(200, 0, 0);
+  }
+  
+  .back_to_menu:hover {
+      background-color: red;
+  }
+}
+
+.tetris_options {
+	padding-bottom: 10px;
+	border-bottom: 1px solid black;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.start {
+	color: white;
+	cursor: pointer;
+	user-select: none;
+	border-radius: 5px;
+	padding: 0.5rem 0.8rem;
+	background-color: rgba(0, 0, 255, 0.5);
+}
+
+.start:hover {
+	background-color: blue;
+}
+
+.tetris_status, .tetris_score_txt {
+	visibility: hidden;
+}
+
+.tetris_box {
+	margin-top: 1rem;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.canvas {
+	border: 1px solid black;
+	width: fit-content;
+	height: fit-content;
+}
+
+.tetris > div:last-of-type {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.back_to_menu {
+	color: white;
+	padding: 0.5rem;
+	cursor: pointer;
+	margin-top: 1.5rem;
+	border-radius: 5px;
+	background-color: red;
+}
+
+.back_to_menu:hover {
+	background-color: rgba(200, 0, 0);
+}

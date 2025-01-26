@@ -34,11 +34,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private UsersRolesRepository usersRolesRepository;
 	
 	private String getRefreshToken(HttpServletRequest request) {
-		return Stream.of(request.getCookies())
-				     .filter(cookie -> cookie.getName().equals("refresh"))
-				     .map(cookie -> cookie.getValue())
-				     .findFirst()
-				     .orElse(null);
+		if (request.getCookies() != null) {
+		    return Stream.of(request.getCookies())
+			        .filter(cookie -> cookie.getName().equals("refresh"))
+				    .map(cookie -> cookie.getValue())
+				    .findFirst()
+				    .orElse(null);
+		}
+		
+		return null;
 	}
 	
 	private List<SimpleGrantedAuthority> getAndConvertUserRoles(Long id) {

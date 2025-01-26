@@ -1,0 +1,64 @@
+<th:block th:fragment="menu">
+    <link rel="stylesheet" th:href="@{/modules/game/menu.css}"/>
+    
+    <div class="menu">
+        <div>
+            <p class="score_text">Очки: <span class="score"></span></p>
+            <div class="photo">
+                <p>Вы</p>
+                <div class="photo_area"></div>
+            </div>
+        </div>
+        
+        <div class="menu_btns">
+            <div class="new_game">Новая игра</div>
+            <div class="persons_records_btn">Список рекордсменов</div>
+        </div>
+    </div>
+    
+    <script th:src="@{/modules/game/menu.js}"></script>
+</th:block>
+
+<th:block th:fragment="tetris">
+    <link rel="stylesheet" th:href="@{/modules/game/tetris.css}"/>
+    
+    <div class="tetris">
+        <div class="tetris_options">
+            <div class="start">Начать игру</div>
+            <div class="tetris_status"></div>
+            <p class="tetris_score_txt">Очки: <span>0</span></p>
+        </div>
+        <div class="tetris_box">
+            <canvas class="canvas"></canvas>
+        </div>
+        <div>
+            <div class="back_to_menu">Вернуться в меню</div>
+        </div>
+    </div>
+    
+    <script th:src="@{/modules/game/tetris.js}"></script>
+</th:block>
+
+<th:block th:fragment="persons_records">
+    <link rel="stylesheet" th:href="@{/modules/game/persons_records.css}"/>
+    
+    <div class="persons_records">
+        <div>
+            <p>Список рекордсменов</p>
+            <div class="pagination">
+                <div class="back disabled_pag">Назад</div>
+                <div><p></p></div>
+                <div><p></p></div>
+                <div><p></p></div>
+                <div><p></p></div>
+                <div class="next">Далее</div>
+            </div>
+        </div>
+        <div class="record_holders_list"></div>
+        <div>
+            <div class="back_to_menu">Вернуться в меню</div>
+        </div>
+    </div>
+    
+    <script th:src="@{/modules/game/persons_records.js}"></script>
+</th:block>

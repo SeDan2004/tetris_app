@@ -19,7 +19,6 @@ import com.example.requests.RegRequest;
 import com.example.responses.AuthResponse;
 import com.example.responses.RegResponse;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -68,17 +67,6 @@ public class AuthenticationService {
 	    this.servletResponse = servletResponse;
 	}
 	
-	private void addRefreshCookie(String refresh) {
-		Cookie cookie;
-				
-		cookie = new Cookie("refresh", refresh);
-		cookie.setPath("/");
-		cookie.setHttpOnly(true);
-		cookie.setMaxAge(refreshExpiration);
-		
-		servletResponse.addCookie(cookie);
-	}
-	
 	public RegResponse reg(RegRequest request) throws Exception {
 		UsersRoles usersRoles;
 		
@@ -104,7 +92,7 @@ public class AuthenticationService {
         details = new UserDetails(id);
         tokenPair = jwtService.createTokenPair(details);
             
-        addRefreshCookie(tokenPair.get("refresh"));
+        jwtService.addRefreshCookie(tokenPair.get("refresh"));
             
         return new RegResponse(tokenPair.get("access"));
 	}
@@ -112,15 +100,11 @@ public class AuthenticationService {
 	public AuthResponse auth(AuthRequest request) throws Exception {
 		String hashPassword;
 		
+		id = request.getId();
 		login = request.getLogin();
 		password = request.getPassword();
-		user = usersRepository.findByLogin(login);
+		user = usersRepository.findById(id).orElse(null);
 		
-		if (user == null) {
-			throw new UserExistException("Учётной записи не существует!");
-		}
-		
-		id = user.getId();
 		hashPassword = user.getPassword();
 		
 		if (!passwordEncoder.matches(password, hashPassword)) {
@@ -130,7 +114,7 @@ public class AuthenticationService {
 		details = new UserDetails(id);
 		tokenPair = jwtService.createTokenPair(details);
 		
-		addRefreshCookie(tokenPair.get("refresh"));
+		jwtService.addRefreshCookie(tokenPair.get("refresh"));
 		
 		return new AuthResponse(tokenPair.get("access"));
 	}

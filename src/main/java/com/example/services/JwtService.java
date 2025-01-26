@@ -1,5 +1,7 @@
 package com.example.services;
 
+import static com.example.configs.security.UserDetails.getUserDetailsOrThrow;
+
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.configs.security.UserDetails;
+import com.example.requests.AccessRequest;
+import com.example.responses.AccessResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class JwtService {
@@ -33,6 +39,20 @@ public class JwtService {
 	
 	@Autowired
 	private ObjectMapper om;
+	@Autowired
+	private HttpServletResponse servletResponse;
+	
+	
+	public void addRefreshCookie(String refresh) {
+		Cookie cookie;
+				
+		cookie = new Cookie("refresh", refresh);
+		cookie.setPath("/");
+		cookie.setHttpOnly(true);
+		cookie.setMaxAge(refreshExpiration);
+		
+		servletResponse.addCookie(cookie);
+	}
 	
 	private String createToken(UserDetails details, Date expiration) throws JsonProcessingException {
 		return Jwts.builder()
@@ -72,5 +92,28 @@ public class JwtService {
 	
 	private SecretKey getSecretKey() {
 		return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+	}
+	
+	public AccessResponse accessIsValid(AccessRequest request) {
+		try {
+			String access;
+			Map<String, String> tokenPair;
+			UserDetails details;
+			
+			access = request.getAccess();
+			
+			verifyAndGet(access);
+			
+			tokenPair = new HashMap<String, String>();
+			details = getUserDetailsOrThrow();
+			
+			tokenPair = createTokenPair(details);
+			
+			addRefreshCookie(tokenPair.get("refresh"));
+			
+			return new AccessResponse(tokenPair.get("access"));
+		} catch (Exception ex) {
+			return new AccessResponse(null);
+		}
 	}
 }

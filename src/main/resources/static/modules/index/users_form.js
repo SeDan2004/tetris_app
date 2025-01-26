@@ -16,27 +16,65 @@ function addEvent() {
 }
 
 function clearUsersList() {
-  usersListBox.hide("");
+  usersListBox.html("");
 }
 
-function displayUsers(users) {							   
-  for (let i = 0; i < users.length; i++) {
-	let person = $("<div class='user'>"),
-	    personBox = $("<div>"),
-		personImg = $("<img>"),
-	    personName = $("<p>");
-		
-    personName.text(users[i]);
-	personBox.append(personName);
-	person.append(personBox);
-	usersListBox.append(person);
+function displayUsers(users) {
+  let userBox,
+      userInnerBox,
+	  imgSrc;
+	
+  function appendSvgInUserInnerBox() {
+	let userSvg = getUserIconSvg(),
+		userSvgBox = $("<div>");
+		  
+    userSvgBox.append(userSvg);
+    userSvgBox.addClass("user_svg_box");
+		    
+    userInnerBox.append(userSvgBox);
   }
+  
+  function appendImgInUserInnerBox() {
+	let userImg = $("<img>");
+	
+	userImg.attr("src", "/users_images" + imgSrc);
+    userInnerBox.append(userImg);
+  }
+								   
+  users.forEach((user) => {
+	let userId = user.id,
+	    login = user.login,
+		userLogin = $("<p>");
+	
+	imgSrc = user.imgSrc;
+		
+	userBox = $("<div>");
+	userInnerBox = $("<div>");		
+	
+	if (imgSrc === null) {
+	  appendSvgInUserInnerBox();
+	} else {
+	  appendImgInUserInnerBox();
+	}
+			
+	userLogin.text(login);
+	
+	userInnerBox.append(userLogin);
+	
+	userBox.append(userInnerBox);
+	userBox.addClass("user");
+	
+	usersListBox.append(userBox);
+	
+	userBox.attr("id", userId);
+	userBox.on("click", showAuthenticationForm);
+  })
 }
 
 function displayPagination(totalUsersCount) {
   pagBtnsCount = Math.ceil(totalUsersCount / 10);
   
-  if (pagBtnsCount > 0) {
+  if (pagBtnsCount > 1) {
 	paginationBox.css({
 	  "margin-top": "1rem",
 	  "visibility": "visible"
@@ -46,27 +84,43 @@ function displayPagination(totalUsersCount) {
   }
 }
 
-function getUsers() {
-  let offset = (currentPagNum - 1) * 10;
-  
-  /*$.ajax({
+function getUserIconSvg() {
+  let svg;
+	
+  $.ajax({
+	async: false,
 	method: "GET",
-	url: "/user/list",
+	url: "/icons/user.svg",
+	success(docSvg) {
+	  svg = docSvg.querySelector("svg");
+	}
+  })
+  
+  return svg;
+}
+
+function getUsers() {
+  let offset = currentPagNum - 1;
+  
+  $.ajax({
+	method: "GET",
+	url: `/user/list/${offset}`,
 	contentType: "application/json",
-	data: JSON.stringify({
-	  offset: offset
-	}),
 	success(response) {
-	  let {"users": users, "totalCount": totalUsersCount} = response;
-	  
+	  let users = response.list,
+	      totalUsersCount = response.totalCount;
+	    
 	  if (usersListBox.children().length > 0) {
 		clearUsersList();
 	  }
 	  
 	  displayUsers(users);
-	  displayPagination(totalUsersCount);
+	  
+	  if (paginationBox.css("visibility") === "hidden") {
+	    displayPagination(totalUsersCount);
+	  }
 	}
-  })*/
+  })
 }
 
 function hidePagination() {
@@ -100,6 +154,19 @@ function showAuthenticationForm(e) {
     showRegForm();
   }
   
+  if (currentBtn.hasClass("user")) {
+	let userImg = currentBtn.find("img").clone();
+	
+	
+	selectedUserId = +currentBtn.attr("id");
+	
+	showAuthForm();
+	
+	if (userImg.length) {
+	  setUserImgAfterShowAuthenticationForm(userImg);
+	}
+  }
+  
   users.animate({"opacity": 0}, {
     duration: 500,
 	complete: function() {
@@ -121,4 +188,4 @@ function togglePagBtnDisable(pag, condition) {
 }
 
 addEvent();
-// getUsers();
+getUsers();

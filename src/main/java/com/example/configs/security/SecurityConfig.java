@@ -20,7 +20,11 @@ public class SecurityConfig {
 		return http.csrf(csrf -> csrf.disable())
 				   .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 		           .authorizeHttpRequests(authorize -> {
-		    	       authorize.requestMatchers("/**").permitAll()
+		    	       authorize.requestMatchers("/game/**").hasAnyRole(
+	    	                        "USER", 
+	    	                        "ADMIN"
+	    	                    )
+		    	                .requestMatchers("/**").permitAll()
 		    	                .anyRequest()
 		    	                .authenticated();
 		           }).build();

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @RequiredArgsConstructor
 public class AuthRequest {
+	private final Long id;
+	
 	@NotNull(message = "Введено пустое поле с логином")
 	private final String login;
 	

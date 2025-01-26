@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Игра</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" th:href="@{/modules/themes/themes.css}"/>
+        <link rel="stylesheet" th:href="@{/game.css}"/>
+        
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div th:replace="~{/modules :: themes}"></div>
+        
+        <main>
+            <div th:replace="~{/game/forms :: menu}"></div>
+            <div th:replace="~{/game/forms :: tetris}"></div>
+            <div th:replace="~{/game/forms :: persons_records}"></div>
+        </main>
+        
+        <script th:src="@{/jwt.js}"></script>
+        <script th:src="@{/game.js}"></script>
+    </body>
+</html>

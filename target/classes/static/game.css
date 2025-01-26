@@ -1,0 +1,46 @@
+body.dark {
+	background-color: rgba(50, 50, 50);
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	transition: 0.5s;
+	display: flex;
+	flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+main {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu, .tetris, .persons_records {
+	width: 35rem;
+	height: 30rem;
+	font-family: Arial;
+	flex-direction: column;
+}
+
+.menu {
+	opacity: 1;
+	display: flex;
+}
+
+.tetris {
+	opacity: 0;
+	display: none;
+}
+
+.persons_records {
+	opacity: 0;
+	display: none;
+}
